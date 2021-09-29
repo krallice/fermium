@@ -151,7 +151,7 @@ resource "azurerm_virtual_machine_extension" "rg" {
   type_handler_version  = "2.0"
   settings		= <<SETTINGS
 	{
-		"fileUris": ["https://raw.githubusercontent.com/krallice/fermium/master/fermium/deploy-fermium.sh"],
+		"fileUris": ["https://raw.githubusercontent.com/krallice/fermium/master/app/deploy-fermium.sh?token=ADCGEEWV7VAMW7JO6VDYNWTBKO3YO"],
 		"commandToExecute": "./deploy-fermium.sh"
 	}
 SETTINGS

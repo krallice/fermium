@@ -19,7 +19,7 @@ pip install pyyaml
 
 # Grab Code:
 echo "Grabbing Code" | systemd-cat -t deploy-fermium
-curl https://raw.githubusercontent.com/krallice/fermium/master/fermium/main.py -o ./main.py
+curl https://raw.githubusercontent.com/krallice/fermium/master/app/main.py?token=ADCGEETBJNBQRBGYOOKY2KDBKO324 -o ./main.py
 
 # Run:
 echo "Running Fermium" | systemd-cat -t deploy-fermium
