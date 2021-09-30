@@ -1,0 +1,124 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "fermium",
+        "description": "",
+        "version": "v2"
+    },
+    "servers": [
+        {
+            "url": "http://ferm-apim-00.azure-api.net/fermium/v2"
+        }
+    ],
+    "paths": {
+        "/elements": {
+            "get": {
+                "summary": "get-elements",
+                "description": "Get all elements keyed by atomic number, providing name",
+                "operationId": "get-elements",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "1": {
+                                        "atomicnumber": 1,
+                                        "elementname": "hydrogen"
+                                    },
+                                    "100": {
+                                        "atomicnumber": 100,
+                                        "elementname": "fermium"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/elements/{atomicnumber}": {
+            "get": {
+                "summary": "get-elements-by-atomic",
+                "description": "Get all elements keyed by atomic number, providing name",
+                "operationId": "6151b0f89ded7ceab895c644",
+                "parameters": [
+                    {
+                        "name": "atomicnumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "atomicnumber": 1,
+                                    "elementname": "hydrogen"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "delete-elements",
+                "description": "Delete element by atomic number",
+                "operationId": "delete-elements",
+                "parameters": [
+                    {
+                        "name": "atomicnumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": null
+                    }
+                }
+            }
+        },
+        "/elements/": {
+            "put": {
+                "summary": "put-elements",
+                "operationId": "put-elements",
+                "responses": {
+                    "200": {
+                        "description": null
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
