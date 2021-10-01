@@ -78,25 +78,6 @@ resource "azurerm_api_management_product" "fermium-product" {
   published             = true
 }
 
-resource "azurerm_api_management_api" "fermium_v2_rev2" {
-  name                  = "fermium-v2"
-  resource_group_name   = azurerm_resource_group.rg.name
-  api_management_name   = azurerm_api_management.apim.name
-  version               = "v2"
-  revision              = "2"
-  display_name          = "fermium"
-  path                  = "fermium"
-  subscription_required = false
-  soap_pass_through     = false
-  protocols = [
-    "http",
-  ]
-  import {
-    content_format = "openapi+json-link"
-    content_value  = "https://raw.githubusercontent.com/krallice/fermium/master/api/fermium_v2_rev2.json"
-  }
-}
-
 resource "azurerm_api_management_api_version_set" "fermium_v2" {
   name                = "6151ac05e139cd62d9f6c772"
   resource_group_name = azurerm_resource_group.rg.name

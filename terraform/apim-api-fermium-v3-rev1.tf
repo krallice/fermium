@@ -1,7 +1,7 @@
 ## Fermium API
 # Version 3
 
-resource "azurerm_api_management_api" "fermium_v2_rev3" {
+resource "azurerm_api_management_api" "fermium_v3" {
   name                  = "fermium-v3"
   resource_group_name   = azurerm_resource_group.rg.name
   api_management_name   = azurerm_api_management.apim.name
@@ -24,82 +24,32 @@ resource "azurerm_api_management_api" "fermium_v2_rev3" {
 }
 
 # Global API Policy:
-#resource "azurerm_api_management_api_policy" "fermium_v2_rev3" {
-#  api_name            = azurerm_api_management_api.fermium_v2_rev3.name
-#  api_management_name = azurerm_api_management_api.fermium_v2_rev3.api_management_name
-#  resource_group_name = azurerm_api_management_api.fermium_v2_rev3.resource_group_name
-#  xml_content         = <<XML
-#<!--
-#    IMPORTANT:
-#    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.
-#    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.
-#    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.
-#    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.
-#    - To remove a policy, delete the corresponding policy statement from the policy document.
-#    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.
-#    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.
-#    - Policies are applied in the order of their appearance, from the top down.
-#    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.
-#-->
-#<policies>
-#        <inbound>
-#                <set-backend-service backend-id="prod-ferm-vm-00" />
-#        </inbound>
-#        <backend>
-#                <base />
-#        </backend>
-#        <outbound>
-#                <base />
-#        </outbound>
-#        <on-error>
-#                <base />
-#        </on-error>
-#</policies>
-#XML
-#}
-#
-#resource "azurerm_api_management_api_operation_policy" "fermium_v2_rev3_get-elements-by-atomic" {
-#  api_name            = azurerm_api_management_api.fermium_v2_rev3.name
-#  api_management_name = azurerm_api_management_api.fermium_v2_rev3.api_management_name
-#  resource_group_name = azurerm_api_management_api.fermium_v2_rev3.resource_group_name
-#  operation_id        = "get-elements-by-atomic"
-#  xml_content         = <<XML
-#<!--
-#    IMPORTANT:
-#    - Policy elements can appear only within the <inbound>, <outbound>, <backend> section elements.
-#    - To apply a policy to the incoming request (before it is forwarded to the backend service), place a corresponding policy element within the <inbound> section element.
-#    - To apply a policy to the outgoing response (before it is sent back to the caller), place a corresponding policy element within the <outbound> section element.
-#    - To add a policy, place the cursor at the desired insertion point and select a policy from the sidebar.
-#    - To remove a policy, delete the corresponding policy statement from the policy document.
-#    - Position the <base> element within a section element to inherit all policies from the corresponding section element in the enclosing scope.
-#    - Remove the <base> element to prevent inheriting policies from the corresponding section element in the enclosing scope.
-#    - Policies are applied in the order of their appearance, from the top down.
-#    - Comments within policy elements are not supported and may disappear. Place your comments between policy elements or at a higher level scope.
-#-->
-#<policies>
-#    <inbound>
-#        <set-variable name="acceptYaml" value="@(context.Request.Headers.GetValueOrDefault("Accept","").Contains("application/yaml"))" />
-#        <base />
-#        <choose>
-#            <when condition="@(context.Variables.GetValueOrDefault<bool>("acceptYaml"))">
-#                <rewrite-uri template="/yaml-elements/{atomicnumber}" />
-#            </when>
-#        </choose>
-#    </inbound>
-#    <backend>
-#        <base />
-#    </backend>
-#    <outbound>
-#        <base />
-#    </outbound>
-#    <on-error>
-#        <base />
-#    </on-error>
-#</policies>
-#XML
-#}
-#
+resource "azurerm_api_management_api_policy" "fermium_v3" {
+  api_name            = azurerm_api_management_api.fermium_v3.name
+  api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
+  resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
+  xml_link    	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_global.xml"
+}
+
+# Specific Policies: 
+resource "azurerm_api_management_api_operation_policy" "fermium_v3_get-elements-by-atomic" {
+  api_name            = azurerm_api_management_api.fermium_v3.name
+  api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
+  resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
+  operation_id        = "get-elements-by-atomic"
+  xml_link 	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_get-elements-by-atomic.xml"
+}
+
+resource "azurerm_api_management_api_operation_policy" "fermium_v3_get-elements" {
+  api_name            = azurerm_api_management_api.fermium_v3.name
+  api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
+  resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
+  operation_id        = "get-elements"
+  xml_link 	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_get-elements.xml"
+}
+
 # Alernate way of specifying API Operations through Terraform (will conflict with the openAPI import):
+
 #resource "azurerm_api_management_api_operation" "fermium_v2_rev3_get-elements" {
 #  api_name            = azurerm_api_management_api.fermium_v2_rev3.name
 #  api_management_name = azurerm_api_management_api.fermium_v2_rev3.api_management_name
