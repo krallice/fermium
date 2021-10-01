@@ -1,19 +1,3 @@
-# Configure the Azure provider
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 2.65"
-    }
-  }
-
-  required_version = ">= 0.14.9"
-}
-
-provider "azurerm" {
-  features {}
-  subscription_id = var.subscriptionid
-}
 resource "azurerm_resource_group" "rg" {
   name     = var.rgname
   location = var.location
@@ -51,7 +35,7 @@ resource "azurerm_network_security_group" "nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "*"
+    source_address_prefix      = "159.196.119.84/32"
     destination_address_prefix = "*"
   }
   security_rule {
@@ -143,13 +127,13 @@ resource "azurerm_linux_virtual_machine" "rg" {
   disable_password_authentication = false
 }
 resource "azurerm_virtual_machine_extension" "rg" {
-  count 		= var.vmcount
-  name 			= "deploy-fermium"
-  virtual_machine_id	= azurerm_linux_virtual_machine.rg.*.id[count.index]
-  publisher             = "Microsoft.Azure.Extensions"
-  type			= "CustomScript"
-  type_handler_version  = "2.0"
-  settings		= <<SETTINGS
+  count                = var.vmcount
+  name                 = "deploy-fermium"
+  virtual_machine_id   = azurerm_linux_virtual_machine.rg.*.id[count.index]
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
+  settings             = <<SETTINGS
 	{
 		"fileUris": ["https://raw.githubusercontent.com/krallice/fermium/master/app/deploy-fermium.sh"],
 		"commandToExecute": "./deploy-fermium.sh"

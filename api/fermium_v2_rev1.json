@@ -41,7 +41,7 @@
             "get": {
                 "summary": "get-elements-by-atomic",
                 "description": "Get all elements keyed by atomic number, providing name",
-                "operationId": "6151b0f89ded7ceab895c644",
+                "operationId": "get-elements-by-atomic",
                 "parameters": [
                     {
                         "name": "atomicnumber",
