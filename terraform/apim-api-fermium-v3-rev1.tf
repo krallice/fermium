@@ -28,7 +28,7 @@ resource "azurerm_api_management_api_policy" "fermium_v3" {
   api_name            = azurerm_api_management_api.fermium_v3.name
   api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
   resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
-  xml_link    	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_global.xml"
+  xml_link    	      = "https://raw.githubusercontent.com/krallice/fermium/master/api/fermium_v3_global.xml"
 }
 
 # Specific Policies: 
@@ -37,7 +37,7 @@ resource "azurerm_api_management_api_operation_policy" "fermium_v3_get-elements-
   api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
   resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
   operation_id        = "get-elements-by-atomic"
-  xml_link 	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_get-elements-by-atomic.xml"
+  xml_link 	      = "https://raw.githubusercontent.com/krallice/fermium/master/api/fermium_v3_get-elements-by-atomic.xml"
 }
 
 resource "azurerm_api_management_api_operation_policy" "fermium_v3_get-elements" {
@@ -45,7 +45,7 @@ resource "azurerm_api_management_api_operation_policy" "fermium_v3_get-elements"
   api_management_name = azurerm_api_management_api.fermium_v3.api_management_name
   resource_group_name = azurerm_api_management_api.fermium_v3.resource_group_name
   operation_id        = "get-elements"
-  xml_link 	      = "https://github.com/krallice/fermium/blob/master/api/fermium_v3_get-elements.xml"
+  xml_link 	      = "https://raw.githubusercontent.com/krallice/fermium/master/api/fermium_v3_get-elements.xml"
 }
 
 # Alernate way of specifying API Operations through Terraform (will conflict with the openAPI import):
