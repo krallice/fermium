@@ -16,7 +16,7 @@
         <base />
         <choose>
             <when condition="@(context.Variables.GetValueOrDefault<bool>("acceptYaml"))">
-                <rewrite-uri template="/yaml-elements/" />
+                <rewrite-uri template="/yaml-elements" />
             </when>
         </choose>
     </inbound>
